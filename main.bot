@@ -1,0 +1,51 @@
+import discord
+from discord.ext import commands
+from botlogic import pass_gen
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Hi! I am a bot {bot.user}!')
+
+@bot.command()
+async def hehe(ctx, count_heh = 5):
+    await ctx.send("he" * count_heh)
+
+@bot.command()
+async def passgen(ctx):
+    await ctx.send('hi! berikut passwordmu: ')
+    await ctx.send(pass_gen(8))
+
+@bot.command()
+async def pangkatdua(ctx):
+    await ctx.send('hi!, masukkan sebuah angka (bebas) nanti tak pangkatin 2')
+    message = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+    await ctx.send(f'Ini hasilnya: {(int(message.content)**2)}')
+
+@bot.command()
+async def pangkattelu(ctx):
+    await ctx.send('hi!, masukkan sebuah angka (bebas) nanti tak pangkatin 3')
+    message3 = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+    await ctx.send(f'Ini hasilnya: {(int(message3.content)**3)}')
+
+@bot.command()
+async def pangkatpapat(ctx):
+    await ctx.send('hi!, masukkan sebuah angka (bebas) nanti tak pangkatin 4')
+    message4 = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+    await ctx.send(f'Ini hasilnya: {(int(message4.content)**4)}')
+
+@bot.command()
+async def pangkatlima(ctx):
+    await ctx.send('hi!, masukkan sebuah angka (bebas) nanti tak pangkatin 5')
+    message5 = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
+    await ctx.send(f'Ini hasilnya: {(int(message5.content)**5)}')
+
+bot.run("")
