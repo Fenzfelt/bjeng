@@ -55,6 +55,13 @@ async def meme(ctx):
         picture = discord.File(f)
     await ctx.send(file=picture)
 
+@bot.command()
+async def animal(ctx):
+    img_name = random.choice(os.listdir('animal'))
+    with open(f'animal/{img_name}', 'rb') as f:
+        picture = discord.File(f)
+    await ctx.send(file=picture)
+
 def get_duck_image_url():    
     url = 'https://random-d.uk/api/random'
     res = requests.get(url)
